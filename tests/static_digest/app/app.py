@@ -12,7 +12,11 @@ static_input_dir = app_root / "static"
 
 def create_app(output_dir=None):
     app = FastAPI()
-    output_dir = output_dir or StaticDigestCompiler.default_output_dir(static_input_dir)
-    static = StaticFiles(directory=output_dir)
+    if output_dir is not None:
+        static_digest = StaticDigest(static_dir=output_dir)
+        static = StaticFiles(directory=static_digest.directory)
+    else:
+        static_digest = StaticDigest(source_dir=static_input_dir)
+        static = StaticFiles(directory=static_digest.directory)
     app.mount("/static", static, name="static")
     return app

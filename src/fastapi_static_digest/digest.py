@@ -7,10 +7,17 @@ import jinja2
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
+from fastapi_static_digest.compiler import StaticDigestCompiler
+
 
 class StaticDigest:
-    def __init__(self, directory):
-        self.directory = directory
+    def __init__(self, source_dir=None, static_dir=None):
+        if source_dir is not None:
+            self.directory = StaticDigestCompiler.default_output_dir(source_dir)
+        elif static_dir is not None:
+            self.directory = static_dir
+        else:
+            raise ValueError("Must provide one of 'source_dir' or 'output_dir'")
         self.manifest_file = Path(self.directory) / "cache_manifest.json"
         self.manifest = self.load_manifest()
 
