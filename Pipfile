@@ -14,6 +14,8 @@ jinja2 = "*"
 
 [dev-packages]
 twine = "*"
+sphinx = "*"
+sphinx-markdown-builder = "*"
 
 [requires]
 python_version = "3.6"

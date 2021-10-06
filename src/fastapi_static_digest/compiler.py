@@ -20,15 +20,15 @@ class StaticDigestCompiler:
 
     :param source_directory: The source directory containing the static files
         to be digested. Must be a Path object. String paths are not supported.
-    :type source_directory: pathlib.Path 
+    :type source_directory: `pathlib.Path`
     :param output_dir: An optional output directory where the digested files
         will be written. This will default to a "_digest/" directory under the
         `source_directory`. If the `output_dir` is used for other purposes, please be
         warned that invoking the `clean` method will remove this directory.
-    :type output_dir: Optional[pathlib.Path]
+    :type output_dir: `Optional[pathlib.Path]`
     :param gzip: A boolean indicating whether or not to _additionally_ include
         gzipped copies of the files in the output_dir.
-    :type gzip: bool
+    :type gzip: `bool`
     """
 
     DEFAULT_OUTPUT_DIR = "./_digest"
