@@ -1,7 +1,11 @@
 import json
 from pathlib import Path
 
-import jinja2
+try:
+    import jinja2
+except ImportError:  # pragma: nocover
+    jinja2 = None  # type: ignore
+
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
