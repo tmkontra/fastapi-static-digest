@@ -20,7 +20,7 @@ def client():
     yield client
     compiler.clean()
 
-def test_manifest(client):
+def test_manifest(client: TestClient):
     digested_name = "data.316447ed7921f01abb8e798be0c41f60.json"
     original = client.get("/static/data.json")
     assert original.status_code == 404
