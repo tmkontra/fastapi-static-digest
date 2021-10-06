@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+uvicorn = "*"
+pytest = "*"
+requests = "*"
+aiofiles = "*"
+fastapi-static-digest = {editable = true, path = "."}
+jinja2 = "*"
+
+[dev-packages]
+twine = "*"
+
+[requires]
+python_version = "3.6"
