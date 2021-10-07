@@ -59,6 +59,9 @@ class StaticDigestCompiler:
     def _list_files(self):
         input_files = []
         for (dirpath, _, filenames) in os.walk(self.source_directory):
+            # if output is subdir of source, skip
+            if Path(dirpath).is_relative_to(self.output_directory):
+                continue
             for filename in filenames:
                 p = Path(dirpath) / filename
                 input_files.append(p)
