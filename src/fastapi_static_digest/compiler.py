@@ -110,4 +110,4 @@ class StaticDigestCompiler:
                 self._warned = True
 
     def _make_output_dir(self):
-        self.output_directory.mkdir(exist_ok=False)
+        self.output_directory.mkdir(exist_ok=True)
