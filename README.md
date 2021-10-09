@@ -4,6 +4,14 @@ A Starlette/FastAPI plugin to digest and compress static files, and integrate wi
 
 `pip install fastapi-static-digest`
 
+# Overview
+
+There are two classes: StaticDigest and StaticDigestCompiler.
+
+The `StaticDigestCompiler.compiler` method will produce the digested directory. The `StaticDigest` (and `starlette.staticfiles.StaticFiles`) should be configured to read this directory. 
+
+The compilation can be added to your build process, for instance with a `click` CLI command (see below). Alternatively, the `FASTAPI_STATICDIGEST_RELOAD=1` environment variable can be set to enable "hot reloading" during development.
+
 # Usage
 
 ```python

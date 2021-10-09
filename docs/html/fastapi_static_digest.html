@@ -42,26 +42,16 @@
 <dt class="sig sig-object py" id="fastapi_static_digest.StaticDigest">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fastapi_static_digest.</span></span><span class="sig-name descname"><span class="pre">StaticDigest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fastapi_static_digest.StaticDigest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Interface to cache manifest for digested static files. One of <cite>source_dir</cite> or 
-<cite>static_dir</cite> must be given.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>source_dir</strong> (<em>pathlib.Path</em>) – The source directory containing the static files
-that were digested. This will resolve the digested output directory
-using the default output directory specified by the StaticDigestCompiler</p></li>
-<li><p><strong>static_dir</strong> (<em>pathlib.Path</em>) – The output directory with the digested static files. This
-would be equivalent to the <cite>directory</cite> passed to fastapi.staticfiles.StaticFiles</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If neither of <cite>source_dir</cite> nor <cite>static_dir</cite> are given.</p>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="fastapi_static_digest.StaticDigest.get_digested">
 <span class="sig-name descname"><span class="pre">get_digested</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fastapi_static_digest.StaticDigest.get_digested" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fastapi_static_digest.StaticDigest.pkg_settings">
+<span class="sig-name descname"><span class="pre">pkg_settings</span></span><a class="headerlink" href="#fastapi_static_digest.StaticDigest.pkg_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">fastapi_static_digest.settings.FastAPIStaticDigestSettings</span></code></p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fastapi_static_digest.StaticDigest.register_static_url_for">
@@ -109,7 +99,12 @@ gzipped copies of the files in the output_dir.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fastapi_static_digest.StaticDigestCompiler.default_output_dir">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">default_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="headerlink" href="#fastapi_static_digest.StaticDigestCompiler.default_output_dir" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">default_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="headerlink" href="#fastapi_static_digest.StaticDigestCompiler.default_output_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fastapi_static_digest.StaticDigestCompiler.default_source_dir">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">default_source_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="headerlink" href="#fastapi_static_digest.StaticDigestCompiler.default_source_dir" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

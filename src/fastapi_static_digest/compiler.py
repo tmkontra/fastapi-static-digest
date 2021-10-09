@@ -53,18 +53,24 @@ class StaticDigestCompiler:
             shutil.rmtree(self.output_directory)
 
     @classmethod
-    def default_output_dir(cls, source_dir) -> Path:
+    def default_output_dir(cls, source_dir: Path) -> Path:
         return Path(source_dir) / cls.DEFAULT_OUTPUT_DIR
+
+    @classmethod
+    def default_source_dir(cls, output_dir: Path) -> Path:
+        return output_dir.parent
 
     def _list_files(self):
         input_files = []
         for (dirpath, _, filenames) in os.walk(self.source_directory):
             # if output is subdir of source, skip
-            if Path(dirpath).is_relative_to(self.output_directory):
+            try:
+                Path(dirpath).relative_to(self.output_directory)
                 continue
-            for filename in filenames:
-                p = Path(dirpath) / filename
-                input_files.append(p)
+            except ValueError: # is not relative to output dir
+                for filename in filenames:
+                    p = Path(dirpath) / filename
+                    input_files.append(p)
         return input_files
 
     def _manifest(self, input_files: List[Path]):

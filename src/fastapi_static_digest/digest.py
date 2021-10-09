@@ -4,6 +4,10 @@ from pathlib import Path
 
 try:
     import jinja2
+    try:
+        pass_context = jinja2.pass_context
+    except AttributeError:
+        pass_context = jinja2.contextfunction
 except ImportError:  # pragma: nocover
     jinja2 = None  # type: ignore
 
@@ -11,11 +15,17 @@ from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
 from fastapi_static_digest.compiler import StaticDigestCompiler
+from fastapi_static_digest.settings import FastAPIStaticDigestSettings
 
 
 class StaticDigest:
+    pkg_settings = FastAPIStaticDigestSettings
+
     """Interface to cache manifest for digested static files. One of `source_dir` or 
     `static_dir` must be given.
+
+    If `FastAPIStaticDigestSettings.RELOAD` is true, this will invoke the compilation
+    step upon instantiation.
 
     :param source_dir: The source directory containing the static files
         that were digested. This will resolve the digested output directory
@@ -34,6 +44,9 @@ class StaticDigest:
             self.directory = static_dir
         else:
             raise ValueError("Must provide one of 'source_dir' or 'output_dir'")
+        if self.pkg_settings.RELOAD:
+            compiler = StaticDigestCompiler(source_directory=source_dir, output_dir=static_dir)
+            compiler.compile()
         self.manifest_file = Path(self.directory) / "cache_manifest.json"
         self.manifest = self._load_manifest()
 
@@ -45,7 +58,7 @@ class StaticDigest:
         return self.manifest.get(path)
 
     def register_static_url_for(self, templates: Jinja2Templates):
-        @jinja2.contextfunction
+        @pass_context
         def static_url_for(context, name, path=None) -> str:
             request: Request = context["request"]
             digested_path = self.get_digested(path)
